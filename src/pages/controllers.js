@@ -8,7 +8,7 @@ export class ControllersPage extends Component {
         const controllers = settings.get('controllers');
         const notifications = settings.get('notifications');
         return (
-            <div> <h3>Controllers</h3>
+            <div> <h3>Контроллеры</h3>
             <div>{controllers.map((c, i) => {
                 const editUrl = `#controllers/edit/${i}`;
                 return (
@@ -21,7 +21,7 @@ export class ControllersPage extends Component {
                     </div>
                     )
             })}</div>
-            <h3>Notifications</h3>
+            <h3>Уведомления</h3>
             <div>{notifications.map((n, i) => {
                 const editUrl = `#controllers/notification/${i}`;
                 return (

@@ -3,12 +3,12 @@ import { pins } from './_defs';
 
 export const pcf8591 = {
     defaults: () => ({
-        'settings.values[0].name': 'Analog',
+        'settings.values[0].name': 'Аналог',
     }),
     sensor: {
-        name: 'Sensor',
+        name: 'Датчик',
         configs: {
-            port: { name: 'PORT', type: 'number', var: 'gpio4' },
+            port: { name: 'Порт', type: 'number', var: 'gpio4' },
         }
     },
     data: true,

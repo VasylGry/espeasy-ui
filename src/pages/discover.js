@@ -1,8 +1,8 @@
 import { h, Component } from 'preact';
 
 const devices = [
-    { nr: 1, name: 'Senzor', type: 'DH11', vars: [{ name: 'Temperature', formula: '', value: 21 }, { name: 'Humidity', formula: '', value: 65 }] },
-    { nr: 1, name: 'Humidity', type: 'Linear Regulator', vars: [{ name: 'Output', formula: '', value: 1 }] }
+    { nr: 1, name: 'Датчик', type: 'DH11', vars: [{ name: 'Temperature', formula: '', value: 21 }, { name: 'Humidity', formula: '', value: 65 }] },
+    { nr: 1, name: 'Влажность', type: 'Linear Regulator', vars: [{ name: 'Output', formula: '', value: 1 }] }
 ]
 
 export class DiscoverPage extends Component {

@@ -9,7 +9,7 @@ const formConfig = {
             name: 'WiFi',
             configs: {
                 ssid: { name: 'SSID', type: 'select', options: [], var: 'security[0].WifiSSID' },
-                passwd: { name: 'Password', type: 'password', var: 'security[0].WifiKey' },
+                passwd: { name: 'Пароль', type: 'password', var: 'security[0].WifiKey' },
             }
         },
     },

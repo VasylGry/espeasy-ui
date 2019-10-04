@@ -5,8 +5,8 @@ import { devices } from '../devices';
 import { set } from '../lib/helpers';
 
 const baseFields = { 
-    enabled: { name: 'Enabled', type: 'checkbox', var: 'enabled' },
-    name: { name: 'Name', type: 'string' },
+    enabled: { name: 'Разрешить', type: 'checkbox', var: 'enabled' },
+    name: { name: 'Имя', type: 'string' },
 };
 
 const getFormConfig = (type) => {
@@ -14,24 +14,24 @@ const getFormConfig = (type) => {
     if (!device) return null;
 
     const dataAcquisitionForm = device.fields.data ? {
-        name: 'Data Acquisition',
+        name: 'Получение данных',
         configs: {
-            send1: { name: 'Send to Controller 1', type: 'checkbox', var: 'TaskDeviceSendData[0]', if: 'controllers[0].enabled' },
-            send2: { name: 'Send to Controller 2', type: 'checkbox', var: 'TaskDeviceSendData[1]', if: 'controllers[1].enabled' },
-            send3: { name: 'Send to Controller 3', type: 'checkbox', var: 'TaskDeviceSendData[2]', if: 'controllers[2].enabled' },
+            send1: { name: 'Отправить на контроллер 1', type: 'checkbox', var: 'TaskDeviceSendData[0]', if: 'controllers[0].enabled' },
+            send2: { name: 'Отправить на контроллер 2', type: 'checkbox', var: 'TaskDeviceSendData[1]', if: 'controllers[1].enabled' },
+            send3: { name: 'Отправить на контроллер 3', type: 'checkbox', var: 'TaskDeviceSendData[2]', if: 'controllers[2].enabled' },
             idx1: { name: 'IDX1', type: 'number', var: 'TaskDeviceID[0]', if: 'controllers[0].enabled' },
             idx2: { name: 'IDX2', type: 'number', var: 'TaskDeviceID[1]', if: 'controllers[1].enabled' },
             idx3: { name: 'IDX3', type: 'number', var: 'TaskDeviceID[2]', if: 'controllers[2].enabled' },
-            interval: { name: 'Interval', type: 'number', var: 'interval' },
+            interval: { name: 'Интервал', type: 'number', var: 'interval' },
         }
     }: {};
        
     return {
         groups: {
             settings: {
-                name: 'Device Settings',
+                name: 'Настройки устройства',
                 configs: {
-                    device: { name: 'Device', type: 'select', var: 'device', options: devices },
+                    device: { name: 'Устройство', type: 'select', var: 'device', options: devices },
                     ...baseFields,
                     
                 }
@@ -39,7 +39,7 @@ const getFormConfig = (type) => {
             ...device.fields,
             data: dataAcquisitionForm,
             values: {
-                name: 'Values',
+                name: 'Значения',
                 configs: {
                     ...[...new Array(device.fields.vals || 0)].reduce((acc, x, i) => {
                         acc[`value${i}`] = [
@@ -95,7 +95,7 @@ export class DevicesEditPage extends Component {
     render(props) {
         const formConfig = getFormConfig(this.state.device);
         if (!formConfig) {
-            alert('something went wrong, cant edit device');
+            alert('Что-то пошло не так, не могу редактировать устройство');
             window.location.href='#devices';
         }
         formConfig.groups.settings.configs.device.onChange = (e) => {

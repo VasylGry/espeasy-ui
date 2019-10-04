@@ -20,42 +20,42 @@ export const pins = [
 ];
 
 const pinState = [
-    { name: 'Default', value: 0 },
-    { name: 'Low', value: 1 },
-    { name: 'High', value: 2 },
-    { name: 'Input', value: 3 },
+    { name: 'По умолчанию', value: 0 },
+    { name: '0', value: 1 },
+    { name: '1', value: 2 },
+    { name: 'Вход', value: 3 },
 ];
 
 const formConfig = {
     groups: {
         led: {
-            name: 'WiFi Status LED',
+            name: 'Светодиод статуса WiFi',
             configs: {
-                gpio: { name: 'GPIO --> LED', type: 'select', options: pins },
-                inverse: { name: 'Inversed LED', type: 'checkbox' },
+                gpio: { name: 'GPIO --> светодиод', type: 'select', options: pins },
+                inverse: { name: 'Ивертировать светодиод', type: 'checkbox' },
             }
         },
         reset: {
-            name: 'Reset Pin',
+            name: 'Вывод сброса',
             configs: {
                 pin: { name: 'GPIO <-- Switch', type: 'select', options: pins },
             }
         },
         i2c: {
-            name: 'I2C Settings',
+            name: 'Настройки I2C',
             configs: {
                 sda: { name: 'GPIO - SDA', type: 'select', options: pins },
                 scl: { name: 'GPIO - SCL', type: 'select', options: pins },
             }
         },
         spi: {
-            name: 'SPI Settings',
+            name: 'Настройки SPI',
             configs: {
                 enabled: { name: 'Init SPI', type: 'checkbox' },
             }
         },
         gpio: {
-            name: 'GPIO boot states',
+            name: 'Установка GPIO при вкл. питания',
             configs: {
                 0: { name: 'Pin Mode GPIO-0', type: 'select', options: pinState },
                 1: { name: 'Pin Mode GPIO-1', type: 'select', options: pinState },

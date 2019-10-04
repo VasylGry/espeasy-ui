@@ -5,17 +5,17 @@ const formConfig = {
     onSave: (vals) => { console.log(vals); },
     groups: {
         keep: {
-            name: 'Settings to keep',
+            name: 'Сохраняемые настройки',
             configs: {
-                unit: { name: 'Keep Unit/Name', type: 'checkbox' },
-                wifi: { name: 'Keep WiFi config', type: 'checkbox' },
-                network: { name: 'Keep network config', type: 'checkbox' },
-                ntp: { name: 'Keep NTP/DST config', type: 'checkbox' },
-                log: { name: 'Keep log config', type: 'checkbox' },
+                unit: { name: 'Сохранить устройство/имя', type: 'checkbox' },
+                wifi: { name: 'Сохранить WiFi настройки', type: 'checkbox' },
+                network: { name: 'Сохранить настройки сети', type: 'checkbox' },
+                ntp: { name: 'Сохранить настройки NTP/DST', type: 'checkbox' },
+                log: { name: 'Сохранить настройки протоколирования', type: 'checkbox' },
             }
         },
         load: {
-            name: 'Pre-defined configurations',
+            name: 'Предопределенные конфигурации',
             configs: {
                 config: { name: 'Pre-Defined config', type: 'select', options: [
                     { name: 'default', value: 0 },

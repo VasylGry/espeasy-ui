@@ -29,7 +29,7 @@ export class ToolsPage extends Component {
         return (
             <div>
                 <div style="width: 100%; height: 200px; overflow-y: scroll;" ref={ref => this.log = ref}>loading logs ...</div>
-                <div>Command: <input type="text" ref={ref => this.cmd = ref}/><button type="button" onClick={this.sendCommand}>send</button></div>
+                <div>Команда: <input type="text" ref={ref => this.cmd = ref}/><button type="button" onClick={this.sendCommand}>послать</button></div>
                 <textarea style="width: 100%; height: 200px" ref={ref => this.cmdOutput = ref}></textarea>
             </div>
         );

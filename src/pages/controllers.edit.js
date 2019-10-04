@@ -5,7 +5,7 @@ import { set } from '../lib/helpers';
 import { EspEaspP2PComponent } from '../components/espeasy_p2p';
 
 export const protocols = [
-    { name: '- Standalone -', value: 0 },
+    { name: '- Автономный -', value: 0 },
     { name: 'Domoticz HTTP', value: 1 },
     { name: 'Domoticz MQTT', value: 2 },
     { name: 'Nodo Telnet', value: 3 },
@@ -13,32 +13,32 @@ export const protocols = [
     { name: 'OpenHAB MQTT', value: 5 },
     { name: 'PiDome MQTT', value: 6 },
     { name: 'Emoncms', value: 7 },
-    { name: 'Generic HTTP', value: 8 },
+    { name: 'Общий HTTP', value: 8 },
     { name: 'FHEM HTTP', value: 9 },
-    { name: 'Generic UDP', value: 10 },
-    { name: 'ESPEasy P2P Networking', value: 13 },
+    { name: 'Общий UDP', value: 10 },
+    { name: 'ESPEasy P2P сеть', value: 13 },
     { name: 'Email', value: 25 },
 ];
 
 const baseFields = { 
     
-    dns: { name: 'Locate Controller', type: 'select', options: [{ value: 0, name: 'Use IP Address'}, { value: 1, name: 'Use Hostname' }] },
-    IP: { name: 'IP', type: 'ip' },
-    hostname: { name: 'Hostname', type: 'string' },
-    port: { name: 'Port', type: 'number' },
-    minimal_time_between: { name: 'Minimum Send Interval', type: 'number' },
-    max_queue_depth: { name: 'Max Queue Depth', type: 'number' },
-    max_retry: { name: 'Max Retries', type: 'number' },
-    delete_oldest: { name: 'Full Queue Action', type: 'select', options: [{ value: 0, name: 'Ignore New'}, { value: 1, name: 'Delete Oldest' }] },
-    must_check_reply: { name: 'Check Reply', type: 'select', options: [{ value: 0, name: 'Ignore Acknowledgement'}, { value: 1, name: 'Check Acknowledgement' }] },
-    client_timeout: { name: 'Client Timeout', type: 'number' },
+    dns: { name: 'Найти контроллер', type: 'select', options: [{ value: 0, name: 'Использовать IP адрес'}, { value: 1, name: 'Использовать имя хоста' }] },
+    IP: { name: 'IP адрес', type: 'ip' },
+    hostname: { name: 'Имя хоста', type: 'string' },
+    port: { name: 'Порт', type: 'number' },
+    minimal_time_between: { name: 'Минимальное время посылки', type: 'number' },
+    max_queue_depth: { name: 'Максимальный размер очереди', type: 'number' },
+    max_retry: { name: 'Макс. кол-во повторов', type: 'number' },
+    delete_oldest: { name: 'Действия при переполнении очереди', type: 'select', options: [{ value: 0, name: 'Игнорировать новый'}, { value: 1, name: 'Удалить старый' }] },
+    must_check_reply: { name: 'Проверить ответ', type: 'select', options: [{ value: 0, name: 'Игнорировать подтверждение'}, { value: 1, name: 'Проверить подтверждение' }] },
+    client_timeout: { name: 'Тайм-аут клиента', type: 'number' },
 };
 
-const user = { name: 'Controller User', type: 'string' };
-const password = { name: 'Controller Password', type: 'password' };
-const subscribe = { name: 'Controller Subscribe', type: 'string' };
-const publish = { name: 'Controller Publish', type: 'string' };
-const lwtTopicField = { MQTT_lwt_topic: { name: 'Controller LWT topic:', type: 'string' }, lwt_message_connect: { name: 'LWT Connect Message', type: 'string' }, lwt_message_disconnect: { name: 'LWT Disconnect Message', type: 'string' }, };
+const user = { name: 'Пользователь контроллера', type: 'string' };
+const password = { name: 'Пароль контроллера', type: 'password' };
+const subscribe = { name: 'Контроллер подписаться', type: 'string' };
+const publish = { name: 'Контроллер опубликовать', type: 'string' };
+const lwtTopicField = { MQTT_lwt_topic: { name: 'Контроллер LWT тема:', type: 'string' }, lwt_message_connect: { name: 'Сообщение LWT Connect', type: 'string' }, lwt_message_disconnect: { name: 'Сообщение LWT Disconnect', type: 'string' }, };
 
 const baseDefaults = {
     port: 1883,
@@ -115,13 +115,13 @@ const getFormConfig = (type) => {
         case 13: //'ESPEasy P2P Networking':
             additionalGroups = {
                 global: {
-                    name: 'Global Settings',
+                    name: 'Глобальные настройки',
                     configs: {
-                        port: { name: 'UDP Port', type: 'number', var: 'ROOT.config.espnetwork.port' }
+                        port: { name: 'UDP порт', type: 'number', var: 'ROOT.config.espnetwork.port' }
                     }
                 },
                 nodes: {
-                    name: 'Connected Nodes',
+                    name: 'Подключенные узлы',
                     configs: {
                         nodes: { type: 'custom', component: EspEaspP2PComponent}
                     }
@@ -136,10 +136,10 @@ const getFormConfig = (type) => {
     return {
         groups: {
             settings: {
-                name: 'Controller Settings',
+                name: 'Настройки контроллера',
                 configs: {
-                    protocol: { name: 'Protocol', type: 'select', var: 'protocol', options: protocols },
-                    enabled: { name: 'Enabled', type: 'checkbox', var: 'enabled' },
+                    protocol: { name: 'Протокол', type: 'select', var: 'protocol', options: protocols },
+                    enabled: { name: 'Разрешить', type: 'checkbox', var: 'enabled' },
                     ...additionalFields
                 }
             },

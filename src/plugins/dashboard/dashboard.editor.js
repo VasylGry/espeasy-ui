@@ -17,7 +17,7 @@ export class DashboardEditorPage extends Component {
         }
 
         this.addPage = ({ title, nodes = []} = {}) => {
-            if (!title) title = prompt('enter page name', 'new');
+            if (!title) title = prompt('Введите имя страницы', 'new');
             this.pages.push({
                 title, nodes, chart: this.createPage({ title, nodes })
             });
@@ -64,12 +64,12 @@ export class DashboardEditorPage extends Component {
                 <div class="dash_menu">
                     <ul>
                         <div style="display: inline" ref={ref => this.menu = ref}></div>
-                        <li><a onClick={this.addPage}>add page</a></li>
+                        <li><a onClick={this.addPage}>Добавить страницу</a></li>
                     </ul>
                     
                 </div>
                 <div class="dash_menu_right">
-                    <div><a onClick={this.saveConfig}>SAVE</a></div>
+                    <div><a onClick={this.saveConfig}>Сохранить</a></div>
                 </div>
                 <ul class="tabs" ref={ref => this.tabs = ref}></ul>
             </div>

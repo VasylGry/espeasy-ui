@@ -8,7 +8,7 @@ export class Page extends Component {
             <div class="header">
                 > {props.page.pagetitle == null ? props.page.title : props.page.pagetitle}
                 { props.changed ? (
-                    <a style="float: right" href="#tools/diff">CHANGED! Click here to SAVE</a>
+                    <a style="float: right" href="#tools/diff">!!! ИЗМЕНЕНО !!! Нажмите СОХРАНИТЬ</a>
                 ) : (null) }
             </div>
 

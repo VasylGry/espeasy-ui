@@ -1,17 +1,17 @@
 import { pins } from './_defs';
 
 const modeTypes = [
-    { value: 0, name: 'LOW' }, 
-    { value: 1, name: 'CHANGE' }, 
-    { value: 2, name: 'RISING' }, 
-    { value: 3, name: 'FALLING' }, 
+    { value: 0, name: 'Низкий' }, 
+    { value: 1, name: 'Изменение' }, 
+    { value: 2, name: 'Передний фронт' }, 
+    { value: 3, name: 'Задний фронт' }, 
 ]
 
 const counterTypes = [
-    { value: 0, name: 'Delta' }, 
-    { value: 1, name: 'Delta/Total/Time' }, 
-    { value: 2, name: 'Total' }, 
-    { value: 3, name: 'Delta/Total' }, 
+    { value: 0, name: 'Дельта' }, 
+    { value: 1, name: 'Дельта/Сумма/Время' }, 
+    { value: 2, name: 'Сумма' }, 
+    { value: 3, name: 'Дельта/Сумма' }, 
 ]
 
 export const genericPulse = {

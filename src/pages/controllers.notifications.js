@@ -5,9 +5,9 @@ import { set } from '../lib/helpers';
 import { pins } from '../devices/_defs';
 
 export const types = [
-    { name: '- None -', value: 0 },
+    { name: '- Нет -', value: 0 },
     { name: 'Email', value: 1 },
-    { name: 'Buzzer', value: 2 },
+    { name: 'Звонок', value: 2 },
 ];
 
 const baseDefaults = {}
@@ -31,15 +31,15 @@ const getFormConfig = (type) => {
     switch (Number(type)) {
         case 1: // Email
             additionalFields = { 
-                domain: { name: 'Domain', type: 'string' },
-                hostname: { name: 'Hostname', type: 'string' },
-                port: { name: 'Port', type: 'number' },
-                sender: { name: 'Sender', type: 'string' },
-                receiver: { name: 'Receiver', type: 'string' },
-                subject: { name: 'Subject', type: 'string' },
-                user: { name: 'Username', type: 'string' },
-                pass: { name: 'Password', type: 'string' },
-                body: { name: 'Body', type: 'textarea' },
+                domain: { name: 'Домен', type: 'string' },
+                hostname: { name: 'Имя хоста', type: 'string' },
+                port: { name: 'Порт', type: 'number' },
+                sender: { name: 'Отправитель', type: 'string' },
+                receiver: { name: 'Получатель', type: 'string' },
+                subject: { name: 'Тема', type: 'string' },
+                user: { name: 'Имя пользователя', type: 'string' },
+                pass: { name: 'Пароль', type: 'string' },
+                body: { name: 'Содержание', type: 'textarea' },
             };
             break;
         case 2: // Buzzer
@@ -52,10 +52,10 @@ const getFormConfig = (type) => {
     return {
         groups: {
             settings: {
-                name: 'Notification Settings',
+                name: 'Настройки уведомлений',
                 configs: {
-                    type: { name: 'Type', type: 'select', var: 'type', options: types },
-                    enabled: { name: 'Enabled', type: 'checkbox', var: 'enabled' },
+                    type: { name: 'Тип', type: 'select', var: 'type', options: types },
+                    enabled: { name: 'Разрешить', type: 'checkbox', var: 'enabled' },
                     ...additionalFields
                 }
             },

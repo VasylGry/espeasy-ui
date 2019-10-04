@@ -2,10 +2,10 @@ import { pins } from './_defs';
 
 export const analogInput = {
     defaults: () => ({
-        'settings.values[0].name': 'Analog',
+        'settings.values[0].name': 'Аналог. вход',
     }),
     sensor: {
-        name: 'Sensor',
+        name: 'Датчик',
         configs: {
             oversampling: { name: 'Oversampling', type: 'checkbox', var: 'configs[0]' },
         }

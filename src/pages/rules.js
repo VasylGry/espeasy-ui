@@ -2,10 +2,10 @@ import { h, Component } from 'preact';
 
 
 const rules = [
-    { name: 'Rule 1', file: 'rules1.txt', index: 1 },
-    { name: 'Rule 2', file: 'rules2.txt', index: 2 },
-    { name: 'Rule 3', file: 'rules3.txt', index: 3 },
-    { name: 'Rule 4', file: 'rules4.txt', index: 4 },
+    { name: 'Программа 1', file: 'rules1.txt', index: 1 },
+    { name: 'Программа 2', file: 'rules2.txt', index: 2 },
+    { name: 'Программа 3', file: 'rules3.txt', index: 3 },
+    { name: 'Программа 4', file: 'rules4.txt', index: 4 },
 ];
 
 export class RulesPage extends Component {

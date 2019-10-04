@@ -18,7 +18,8 @@ import {
     DiffPage, 
     RulesEditorPage, 
     SetupPage,
-    SysVarsPage
+    SysVarsPage,
+	TestPage
 } from '../pages';
 
 import { saveConfig } from '../conf/config.dat';
@@ -51,33 +52,34 @@ class Menus {
 }
 
 const menus = [
-    { title: 'Devices', href: 'devices', component: DevicesPage, children: [] },
-    { title: 'Controllers', href: 'controllers', component: ControllersPage, children: [] },
-    { title: 'Automation', href: 'rules', component: RulesEditorPage, class: 'full', children: [] },
-    { title: 'Config', href: 'config', component: ConfigPage, children: [
-        { title: 'Hardware', href: 'config/hardware', component: ConfigHardwarePage },
-        { title: 'Advanced', href: 'config/advanced', component: ConfigAdvancedPage },
-        { title: 'Rules', href: 'config/rules', component: RulesPage },
-        { title: 'Save', href: 'config/save', action: saveConfig },
-        { title: 'Load', href: 'config/load', component: LoadPage },
-        { title: 'Reboot', href: 'config/reboot', component: RebootPage },
-        { title: 'Factory Reset', href: 'config/factory', component: FactoryResetPage },
+    { title: 'Устройства', href: 'devices', component: DevicesPage, children: [] },
+    { title: 'Контроллеры', href: 'controllers', component: ControllersPage, children: [] },
+    { title: 'Автоматизация', href: 'rules', component: RulesEditorPage, class: 'full', children: [] },
+    { title: 'Конфигурация', href: 'config', component: ConfigPage, children: [
+        { title: 'Аппаратура', href: 'config/hardware', component: ConfigHardwarePage },
+        { title: 'Расширения', href: 'config/advanced', component: ConfigAdvancedPage },
+        { title: 'Правила', href: 'config/rules', component: RulesPage },
+        { title: 'Сохранить', href: 'config/save', action: saveConfig },
+        { title: 'Загрузить', href: 'config/load', component: LoadPage },
+        { title: 'Перегрузка', href: 'config/reboot', component: RebootPage },
+        { title: 'Заводские настройки', href: 'config/factory', component: FactoryResetPage },
     ] },
-    { title: 'Tools', href: 'tools', component: ToolsPage, children: [
-        { title: 'Discover', href: 'tools/discover', component: DiscoverPage },
-        { title: 'Info', href: 'tools/sysinfo', component: SysVarsPage },
-        { title: 'Update', href: 'tools/update', component: UpdatePage },
-        { title: 'Filesystem', href: 'tools/fs', component: FSPage },
-        { title: 'Back to old UI', href: 'tools/oldui', action: oldUI },
+    { title: 'Инструменты', href: 'tools', component: ToolsPage, children: [
+        { title: 'Обнаружить', href: 'tools/discover', component: DiscoverPage },
+        { title: 'Инфо', href: 'tools/sysinfo', component: SysVarsPage },
+        { title: 'Обновить', href: 'tools/update', component: UpdatePage },
+        { title: 'Файловая система', href: 'tools/fs', component: FSPage },
+//        { title: 'Старое ЧМИ', href: 'tools/oldui', action: oldUI },
     ] },
+	{ title: 'Test Page', href: 'test', component: TestPage, children: [] },
 ];
 
 const routes = [
-    { title: 'Edit Controller', href:'controllers/edit', component: ControllerEditPage },
-    { title: 'Edit Notification', href:'controllers/notification', component: ControllerNotificationsPage },
-    { title: 'Edit Device', href:'devices/edit', component: DevicesEditPage },
-    { title: 'Save to Flash', href:'tools/diff', component: DiffPage },
-    { title: 'Setup', href: 'config/setup', component: SetupPage }
+    { title: 'Редактировать контроллер', href:'controllers/edit', component: ControllerEditPage },
+    { title: 'Редактировать сообщения', href:'controllers/notification', component: ControllerNotificationsPage },
+    { title: 'Редактировать устройства', href:'devices/edit', component: DevicesEditPage },
+    { title: 'Сохранить в флеш', href:'tools/diff', component: DiffPage },
+    { title: 'Настройки', href: 'config/setup', component: SetupPage }
 ];
 
 const menu = new Menus();
