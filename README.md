@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### developing
 
 1. you will need `nodejs` and `git`
@@ -232,3 +233,7 @@ this is it, you should have your test page show up in espeasy.
 ### form component
 
 ### writting a plugin
+=======
+# espeasy-ui
+clone espeasy-ui for ESPEasy web interface
+>>>>>>> 9c85832f44f567880d91480d2d853f8d4d4d8e69
