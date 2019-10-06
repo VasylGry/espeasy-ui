@@ -3,13 +3,12 @@ import { h, Component } from 'preact';
 export class TestPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: false, isPumpOn: false, isLightOn: false, value: 'Програма1'};
+        this.state = {isPumpOn: false, isLightOn: false, isFanOn: false, isHeatOn: false, value: 'Програма1'};
     
         this.handlePump = this.handlePump.bind(this);
         this.handleLight = this.handleLight.bind(this);
-        //this.handleClick3 = this.handleClick3.bind(this);
-        //this.handleClick4 = this.handleClick4.bind(this);
-        this.handleClick1 = this.handleClick1.bind(this);
+        this.handleFan = this.handleFan.bind(this);
+        this.handleHeat = this.handleHeat.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
@@ -26,9 +25,15 @@ export class TestPage extends Component {
         }));
       }
 
-      handleClick1() {
+      handleFan() {
         this.setState(state => ({
-          isToggleOn: !state.isToggleOn
+          isFanOn: !state.isFanOn
+        }));
+      }
+
+      handleHeat() {
+        this.setState(state => ({
+          isHeatOn: !state.isHeatOn
         }));
       }
 
@@ -47,7 +52,7 @@ export class TestPage extends Component {
                 <div>
                     <label>Полив</label>
                     <button onClick={this.handlePump}>
-                        {this.state.isPumpOn ? 'ON' : 'OFF'}
+                        {this.state.isPumpOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
                 <div>
@@ -56,9 +61,16 @@ export class TestPage extends Component {
                         {this.state.isLightOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
-                <button onClick={this.handleClick1}>
-                    {this.state.isToggleOn ? 'ON' : 'OFF'}
-                </button>
+                <div>
+                  <button onFan={this.handleFan}>
+                      {this.state.isFanOn ? 'Вкл.' : 'Выкл.'}
+                  </button>
+                </div>
+                <div>
+                  <button onHeat={this.handleHeat}>
+                      {this.state.isHeatOn ? 'Вкл.' : 'Выкл.'}
+                  </button>
+                </div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Выберите программу:
