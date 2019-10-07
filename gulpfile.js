@@ -62,13 +62,25 @@ gulp.task('pagesinline', function() {
       .pipe(gzip())
       .pipe(gulp.dest('./build'));
   });
+  
+gulp.task('default', gulp.series('styles', 'scripts', 'pages', 'pagesinline', (done) => {
 
+    // image changes
+    //gulp.watch(imgConfig.src, gulp.series('images'));
+  
+    // CSS changes
+    //gulp.watch(cssConfig.watch, gulp.series('css'));
+  
+    done();
+  
+  }));
+  
 // Gulp task to minify all files
-gulp.task('default', function () {
-  runSequence(
-    'styles',
-    'scripts',
-    'pages',
-    'pagesinline'
-  );
-});
+//gulp.task('default', function () {
+//  runSequence(
+//    'styles',
+//    'scripts',
+//    'pages',
+//    'pagesinline'
+//  );
+//});

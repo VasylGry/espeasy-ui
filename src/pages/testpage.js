@@ -3,7 +3,13 @@ import { h, Component } from 'preact';
 export class TestPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {isPumpOn: false, isLightOn: false, isFanOn: false, isHeatOn: false, value: 'Програма1'};
+        this.state = {
+          isPumpOn: false, 
+          isLightOn: true, 
+          isFanOn: false, 
+          isHeatOn: true, 
+          value: 'Програма1',
+          programs: null};
     
         this.handlePump = this.handlePump.bind(this);
         this.handleLight = this.handleLight.bind(this);
@@ -11,8 +17,23 @@ export class TestPage extends Component {
         this.handleHeat = this.handleHeat.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePrograms = this.handlePrograms.bind(this);
       }
-    
+
+      handlePrograms(){  
+        fetch('./progs.json').then(response => {
+//          console.log(response);
+          return response.json();
+        }).then(programs => {
+          // Work with JSON data here
+          console.log(programs);
+          return this.setState({programs});
+        }).catch(err => {
+          // Do something for an error here
+          console.log("Error Reading data " + err);
+        });
+      }
+
       handlePump() {
         this.setState(state => ({
             isPumpOn: !state.isPumpOn
@@ -50,24 +71,26 @@ export class TestPage extends Component {
         return (
             <div>
                 <div>
-                    <label>Полив</label>
+                    <label>Полив       </label>
                     <button onClick={this.handlePump}>
                         {this.state.isPumpOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
                 <div>
-                    <label>Освещение</label>
+                    <label>Освещение   </label>
                     <button onClick={this.handleLight}>
                         {this.state.isLightOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
                 <div>
-                  <button onFan={this.handleFan}>
+                <label>Вентиляция  </label>
+                  <button onClick={this.handleFan}>
                       {this.state.isFanOn ? 'Вкл.' : 'Выкл.'}
                   </button>
                 </div>
                 <div>
-                  <button onHeat={this.handleHeat}>
+                <label>Нагрев      </label>
+                  <button onClick={this.handleHeat}>
                       {this.state.isHeatOn ? 'Вкл.' : 'Выкл.'}
                   </button>
                 </div>
@@ -83,6 +106,12 @@ export class TestPage extends Component {
                     </label>
                     <input type="submit" value="Выбрать" />
                 </form>
+                <div>
+                  <p>{this.state.programs}</p>
+                  <button onClick={this.handlePrograms}>
+                     Load data ...
+                  </button>
+                </div>
             </div>
         );
       }
