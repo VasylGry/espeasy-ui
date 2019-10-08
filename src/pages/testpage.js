@@ -8,7 +8,7 @@ export class TestPage extends Component {
           isLightOn: true, 
           isFanOn: false, 
           isHeatOn: true, 
-          value: 'Програма1',
+          value: 'Программа №1',
           programs: null};
     
         this.handlePump = this.handlePump.bind(this);
@@ -71,43 +71,44 @@ export class TestPage extends Component {
         return (
             <div>
                 <div>
-                    <label>Полив       </label>
+                    <label>Полив&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <button onClick={this.handlePump}>
                         {this.state.isPumpOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
                 <div>
-                    <label>Освещение   </label>
+                    <label>Освещение&nbsp;&nbsp;</label>
                     <button onClick={this.handleLight}>
                         {this.state.isLightOn ? 'Вкл.' : 'Выкл.'}
                     </button>
                 </div>
                 <div>
-                <label>Вентиляция  </label>
+                <label>Вентиляция&nbsp;</label>
                   <button onClick={this.handleFan}>
                       {this.state.isFanOn ? 'Вкл.' : 'Выкл.'}
                   </button>
                 </div>
                 <div>
-                <label>Нагрев      </label>
+                <label>Нагрев&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                   <button onClick={this.handleHeat}>
                       {this.state.isHeatOn ? 'Вкл.' : 'Выкл.'}
                   </button>
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                
                     <label>
-                        Выберите программу:
-                        <select value={this.state.value} onChange={this.handleChange}>
-                            <option value="програма1">Програма1</option>
-                            <option value="програма2">Програма2</option>
-                            <option value="програма3">Програма3</option>
-                            <option value="програма4">Програма4</option>
+                        Программа&nbsp;&nbsp;:
+                        <select defaultValue = "Выберите программу" value={this.state.value} onChange={this.handleChange}>
+                            <option value="програма1">Программа №1</option>
+                            <option value="програма2">Программа №2</option>
+                            <option value="програма3">Программа №3</option>
+                            <option value="програма4">Программа №4</option>
                         </select>
                     </label>
+                  <form onSubmit={this.handleSubmit}>
                     <input type="submit" value="Выбрать" />
-                </form>
+                  </form>
                 <div>
-                  <p>{this.state.programs}</p>
+                  <p>{JSON.stringify(this.state.programs)}</p>
                   <button onClick={this.handlePrograms}>
                      Load data ...
                   </button>
