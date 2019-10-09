@@ -1,23 +1,63 @@
 import { h, Component } from 'preact';
+import { getJsonStat } from '../lib/espeasy';
+
+class CtrlButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOn: false,
+      cmd:  ""
+    }
+    this.handleClick = this.handleClick.bind(this);
+  } 
+  handleClick() {
+    this.setState(state => ({
+        isOn: !state.isOn
+    }));
+  }
+  render() {
+    return (
+      <div>
+          <button onClick={this.handleClick}>
+            {this.state.isOn ? 'Вкл.' : 'Выкл.'}
+          </button>
+          <label>{this.props.name}</label>
+       </div>
+    )
+  }
+}
 
 export class TestPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isPumpOn: false, 
-          isLightOn: true, 
-          isFanOn: false, 
-          isHeatOn: true, 
-          value: 'Программа №1',
-          programs: null};
+          value: 1,
+          variables: null,
+          programs: null,
+          clouds: [],
+          date: new Date()};
     
-        this.handlePump = this.handlePump.bind(this);
-        this.handleLight = this.handleLight.bind(this);
-        this.handleFan = this.handleFan.bind(this);
-        this.handleHeat = this.handleHeat.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePrograms = this.handlePrograms.bind(this);
+      }
+
+      componentDidMount() {
+        this.handlePrograms();
+        this.timerID = setInterval(
+          () => this.tick(),
+          1000
+        );
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timerID);
+      }
+
+      tick() {
+        this.setState({
+          date: new Date()
+        });
       }
 
       handlePrograms(){  
@@ -27,35 +67,12 @@ export class TestPage extends Component {
         }).then(programs => {
           // Work with JSON data here
           console.log(programs);
-          return this.setState({programs});
+          this.setState({programs : programs});
+          console.log(this.state.programs.id);
         }).catch(err => {
           // Do something for an error here
           console.log("Error Reading data " + err);
         });
-      }
-
-      handlePump() {
-        this.setState(state => ({
-            isPumpOn: !state.isPumpOn
-        }));
-      }
-
-      handleLight() {
-        this.setState(state => ({
-          isLightOn: !state.isLightOn
-        }));
-      }
-
-      handleFan() {
-        this.setState(state => ({
-          isFanOn: !state.isFanOn
-        }));
-      }
-
-      handleHeat() {
-        this.setState(state => ({
-          isHeatOn: !state.isHeatOn
-        }));
       }
 
       handleChange(event) {
@@ -63,50 +80,34 @@ export class TestPage extends Component {
       }
     
       handleSubmit(event) {
-        alert('Выбрана програма: ' + this.state.value);
+        alert('Выбрана Программа №' + this.state.value);
         event.preventDefault();
       }
-    
+
       render() {
         return (
             <div>
+                <h2>Сейчас {this.state.date.toLocaleTimeString()}.</h2>
                 <div>
-                    <label>Полив&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <button onClick={this.handlePump}>
-                        {this.state.isPumpOn ? 'Вкл.' : 'Выкл.'}
-                    </button>
+                  <CtrlButton name = " Полив" />
+                  <CtrlButton name = " Освещение" />
+                  <CtrlButton name = " Вентиляция" />
+                  <CtrlButton name = " Нагрев" />
                 </div>
                 <div>
-                    <label>Освещение&nbsp;&nbsp;</label>
-                    <button onClick={this.handleLight}>
-                        {this.state.isLightOn ? 'Вкл.' : 'Выкл.'}
-                    </button>
-                </div>
-                <div>
-                <label>Вентиляция&nbsp;</label>
-                  <button onClick={this.handleFan}>
-                      {this.state.isFanOn ? 'Вкл.' : 'Выкл.'}
-                  </button>
-                </div>
-                <div>
-                <label>Нагрев&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                  <button onClick={this.handleHeat}>
-                      {this.state.isHeatOn ? 'Вкл.' : 'Выкл.'}
-                  </button>
-                </div>
-                
                     <label>
                         Программа&nbsp;&nbsp;:
-                        <select defaultValue = "Выберите программу" value={this.state.value} onChange={this.handleChange}>
-                            <option value="програма1">Программа №1</option>
-                            <option value="програма2">Программа №2</option>
-                            <option value="програма3">Программа №3</option>
-                            <option value="програма4">Программа №4</option>
+                        <select defaultValue = "Выберите программу" onChange={this.handleChange}>
+                            <option value="1">Программа №1</option>
+                            <option value="2">Программа №2</option>
+                            <option value="3">Программа №3</option>
+                            <option value="4">Программа №4</option>
                         </select>
                     </label>
-                  <form onSubmit={this.handleSubmit}>
-                    <input type="submit" value="Выбрать" />
-                  </form>
+                    <form onSubmit={this.handleSubmit}>
+                      <input type="submit" value="Выбрать" />
+                    </form>
+                </div>
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>
                   <button onClick={this.handlePrograms}>
