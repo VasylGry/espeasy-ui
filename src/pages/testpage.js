@@ -61,14 +61,14 @@ export class TestPage extends Component {
       }
 
       handlePrograms(){  
-        fetch('./progs.json').then(response => {
-//          console.log(response);
-          return response.json();
-        }).then(programs => {
+        fetch('./progs.json').then(res => {
+          console.log(res);
+          res.json();
+        }).then(result => {
           // Work with JSON data here
-          console.log(programs);
-          this.setState({programs : programs});
-          console.log(this.state.programs.id);
+          console.log(result);
+          this.setState({clouds : result});
+          console.log(this.state.clouds);
         }).catch(err => {
           // Do something for an error here
           console.log("Error Reading data " + err);
@@ -114,6 +114,13 @@ export class TestPage extends Component {
                      Load data ...
                   </button>
                 </div>
+                <ul>
+                  {this.state.clouds.map(item => (
+                    <li key={item.name}>
+                      {item.name} {item.id}
+                    </li>
+                  ))}
+                </ul>
             </div>
         );
       }
