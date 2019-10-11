@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 import { getJsonStat } from '../lib/espeasy';
 
+const jsonStr = {"one":1, "two":2}
+
 class CtrlButton extends Component {
   constructor(props) {
     super(props);
@@ -61,14 +63,13 @@ export class TestPage extends Component {
       }
 
       handlePrograms(){  
-        fetch('./progs.json').then(res => {
-          console.log(res);
-          res.json();
+        fetch('./progs.json').then(response => {
+          return response.json()
         }).then(result => {
           // Work with JSON data here
           console.log(result);
-          this.setState({clouds : result});
-          console.log(this.state.clouds);
+          this.setState({programs : result})
+          console.log(this.state.programs)
         }).catch(err => {
           // Do something for an error here
           console.log("Error Reading data " + err);
@@ -115,7 +116,7 @@ export class TestPage extends Component {
                   </button>
                 </div>
                 <ul>
-                  {this.state.clouds.map(item => (
+                  {jsonStr.map(item => (
                     <li key={item.name}>
                       {item.name} {item.id}
                     </li>
