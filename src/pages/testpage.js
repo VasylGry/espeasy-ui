@@ -1,7 +1,14 @@
 import { h, Component } from 'preact';
 import { getJsonStat } from '../lib/espeasy';
 
-const jsonStr = {"one":1, "two":2}
+const jsonData = [
+  {id: 1, time: "08:20:00", pump: 1},
+  {id: 2, time: "08:40:00", pump: 0},
+  {id: 3, time: "14:00:00", pump: 1},
+  {id: 4, time: "14:10:00", pump: 0},
+  {id: 5, time: "07:30:00", light: 0},
+  {id: 6, time: "19:30:00", light: 1},
+]
 
 class CtrlButton extends Component {
   constructor(props) {
@@ -35,8 +42,8 @@ export class TestPage extends Component {
         this.state = {
           value: 1,
           variables: null,
-          programs: null,
-          clouds: [],
+          programs: this.handlePrograms(),
+          devices: [{id: 0, time: "00:00:00", pump: 0, light: 0 }],
           date: new Date()};
     
         this.handleChange = this.handleChange.bind(this);
@@ -45,7 +52,7 @@ export class TestPage extends Component {
       }
 
       componentDidMount() {
-        this.handlePrograms();
+ //       this.handlePrograms();
         this.timerID = setInterval(
           () => this.tick(),
           1000
@@ -85,6 +92,27 @@ export class TestPage extends Component {
         event.preventDefault();
       }
 
+      renderTableHeader() {
+        let header = Object.keys(this.state.devices[0])
+        return header.map((key, index) => {
+           return <th key={index}>{key.toUpperCase()}</th>
+        })
+     }
+    
+      renderTableData() {
+          return jsonData.map((device, index) => {
+             const {id, time, pump, light } = device //destructuring
+             return (
+                <tr key={id}>
+                   <td>{id}</td>
+                   <td>{time}</td>
+                   <td>{pump === undefined ? '******' : pump === 1 ? "ON" : "OFF"}</td>
+                   <td>{light === undefined ? '******' : light=== 1 ? "ON" : "OFF"}</td>
+                </tr>
+             );
+          });
+       }
+
       render() {
         return (
             <div>
@@ -114,14 +142,13 @@ export class TestPage extends Component {
                   <button onClick={this.handlePrograms}>
                      Load data ...
                   </button>
+                  <table id='device'>
+                    <tbody>
+                      <tr> {this.renderTableHeader()} </tr>
+                      {this.renderTableData()}
+                    </tbody>
+                  </table>
                 </div>
-                <ul>
-                  {jsonStr.map(item => (
-                    <li key={item.name}>
-                      {item.name} {item.id}
-                    </li>
-                  ))}
-                </ul>
             </div>
         );
       }
