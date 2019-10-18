@@ -42,5 +42,12 @@
     "lodash": "^4.17.15",
     "mini-toastr": "^0.8.1",
     "preact": "^8.5.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
   }
 }

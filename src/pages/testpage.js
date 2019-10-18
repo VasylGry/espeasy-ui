@@ -3,12 +3,40 @@ import { getJsonStat } from '../lib/espeasy';
 
 const jsonData = [
   {id: 1, time: "08:20:00", pump: 1},
-  {id: 2, time: "08:40:00", pump: 0},
-  {id: 3, time: "14:00:00", pump: 1},
-  {id: 4, time: "14:10:00", pump: 0},
-  {id: 5, time: "07:30:00", light: 0},
-  {id: 6, time: "19:30:00", light: 1},
+  {id: 1, time: "08:40:00", pump: 0},
+  {id: 1, time: "14:00:00", pump: 1},
+  {id: 1, time: "14:10:00", pump: 0},
+  {id: 1, time: "07:30:00", light: 0},
+  {id: 1, time: "19:30:00", light: 1},
 ]
+
+class Time extends Component {
+  constructor(props){
+      super(props);
+      this.timer = 0;
+      this.state = {
+          time: new Date()
+      };
+  }
+  componentWillMount(){
+      // set up timer
+      this.timer = setTimeout(() => {
+          this.setState({
+              time: new Date()
+          });
+          this.componentWillMount();
+      }, Math.floor(Date.now() / 1000) * 1000 + 1000 - Date.now());
+  }
+  componentWillUnmount(){
+      // remove timer
+      clearTimeout(this.timer);
+  }
+  
+  render() {
+      // render the current time
+      return this.state.time.toLocaleTimeString();
+  }
+}
 
 class CtrlButton extends Component {
   constructor(props) {
@@ -53,20 +81,14 @@ export class TestPage extends Component {
 
       componentDidMount() {
  //       this.handlePrograms();
-        this.timerID = setInterval(
-          () => this.tick(),
-          1000
-        );
+//        this.timerID = setInterval(
+//          () => this.tick(),
+//          1000
+//        );
       }
 
       componentWillUnmount() {
-        clearInterval(this.timerID);
-      }
-
-      tick() {
-        this.setState({
-          date: new Date()
-        });
+ //       clearInterval(this.timerID);
       }
 
       handlePrograms(){  
@@ -103,12 +125,12 @@ export class TestPage extends Component {
           return jsonData.map((device, index) => {
              const {id, time, pump, light } = device //destructuring
              return (
-                <tr key={id}>
-                   <td>{id}</td>
-                   <td>{time}</td>
-                   <td>{pump === undefined ? '******' : pump === 1 ? "ON" : "OFF"}</td>
-                   <td>{light === undefined ? '******' : light=== 1 ? "ON" : "OFF"}</td>
-                </tr>
+                  <tr key={id}>
+                    <td>{id}</td>
+                    <td>{time}</td>
+                    <td>{pump === undefined ? '******' : pump === 1 ? "ON" : "OFF"}</td>
+                    <td>{light === undefined ? '******' : light=== 1 ? "ON" : "OFF"}</td>
+                  </tr>
              );
           });
        }
@@ -116,7 +138,9 @@ export class TestPage extends Component {
       render() {
         return (
             <div>
-                <h2>Сейчас {this.state.date.toLocaleTimeString()}.</h2>
+                <div>
+                  <Time />
+                </div>
                 <div>
                   <CtrlButton name = " Полив" />
                   <CtrlButton name = " Освещение" />
@@ -140,14 +164,13 @@ export class TestPage extends Component {
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>
                   <button onClick={this.handlePrograms}>
-                     Load data ...
+                    <table id='device'>
+                      <tbody>
+                        <tr> {this.renderTableHeader()} </tr> 
+                        {this.renderTableData()}
+                      </tbody>
+                    </table>
                   </button>
-                  <table id='device'>
-                    <tbody>
-                      <tr> {this.renderTableHeader()} </tr>
-                      {this.renderTableData()}
-                    </tbody>
-                  </table>
                 </div>
             </div>
         );
