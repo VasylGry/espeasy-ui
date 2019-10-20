@@ -1,13 +1,13 @@
 import { h, Component } from 'preact';
 import { getJsonStat } from '../lib/espeasy';
 
-const jsonData = [
-  {id: 1, time: "08:20:00", pump: 1},
-  {id: 1, time: "08:40:00", pump: 0},
-  {id: 1, time: "14:00:00", pump: 1},
-  {id: 1, time: "14:10:00", pump: 0},
-  {id: 1, time: "07:30:00", light: 0},
-  {id: 1, time: "19:30:00", light: 1},
+const DEVICES = [
+  {name: "pump", time: "08:20:00", onOff: 1},
+  {name: "pump", time: "08:40:00", onOff: 0},
+  {name: "pump", time: "14:00:00", onOff: 1},
+  {name: "pump", time: "14:10:00", onOff: 0},
+  {name: "light", time: "07:30:00", onOff: 0},
+  {name: "light", time: "19:30:00", onOff: 1},
 ]
 
 class Time extends Component {
@@ -43,7 +43,7 @@ class CtrlButton extends Component {
     super(props);
     this.state = {
       isOn: false,
-      cmd:  ""
+      cmd:  "control?cmd=pcfgpio,{port},1"
     }
     this.handleClick = this.handleClick.bind(this);
   } 
@@ -51,16 +51,91 @@ class CtrlButton extends Component {
     this.setState(state => ({
         isOn: !state.isOn
     }));
+    const onOff = this.state.isOn ? 0 : 1;
+    const url = 'http://192.168.0.103/control?cmd=pcfgpio,' + this.props.port + ',' + onOff;
+    console.log(url);
+    fetch(url)
+      .then(response => response.text())
+      .then(cmd => this.setState({ cmd }));
   }
   render() {
     return (
       <div>
-          <button onClick={this.handleClick}>
+          <button onClick={this.handleClick} >
             {this.state.isOn ? 'Вкл.' : 'Выкл.'}
           </button>
           <label>{this.props.name}</label>
        </div>
     )
+  }
+}
+
+class DeviceRow extends Component {
+  render() {
+    const name = this.props.name;
+    return (
+      <tr>
+        <th colSpan="2">
+          {name}
+        </th>
+      </tr>
+    );
+  }
+}
+
+class TimeRow extends Component {
+  render() {
+    const device = this.props.device;
+    const time = device.time;
+    const onOff = device.onOff ?
+      <span style={{color: 'green'}}>
+        <b>{"ON"}</b>
+      </span>
+      :
+      <span>
+        <b>{"OFF"}</b>
+      </span>;
+    return (
+      <tr>
+        <td>{time}</td>
+        <td>{onOff}</td>
+      </tr>
+    );
+  }
+}
+
+class DeviceTable extends Component {
+  render() {
+    const rows = [];
+    let lastName = null;
+    
+    this.props.devices.forEach((device) => {
+      if (device.name !== lastName) {
+        rows.push(
+          <DeviceRow
+            name={device.name}
+            key={device.name} />
+        );
+      }
+      rows.push(
+        <TimeRow
+          device={device}
+          key={device.name} />
+      );
+      lastName = device.name;
+    });
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
   }
 }
 
@@ -71,7 +146,6 @@ export class TestPage extends Component {
           value: 1,
           variables: null,
           programs: this.handlePrograms(),
-          devices: [{id: 0, time: "00:00:00", pump: 0, light: 0 }],
           date: new Date()};
     
         this.handleChange = this.handleChange.bind(this);
@@ -114,38 +188,14 @@ export class TestPage extends Component {
         event.preventDefault();
       }
 
-      renderTableHeader() {
-        let header = Object.keys(this.state.devices[0])
-        return header.map((key, index) => {
-           return <th key={index}>{key.toUpperCase()}</th>
-        })
-     }
-    
-      renderTableData() {
-          return jsonData.map((device, index) => {
-             const {id, time, pump, light } = device //destructuring
-             return (
-                  <tr key={id}>
-                    <td>{id}</td>
-                    <td>{time}</td>
-                    <td>{pump === undefined ? '******' : pump === 1 ? "ON" : "OFF"}</td>
-                    <td>{light === undefined ? '******' : light=== 1 ? "ON" : "OFF"}</td>
-                  </tr>
-             );
-          });
-       }
-
       render() {
         return (
             <div>
                 <div>
-                  <Time />
-                </div>
-                <div>
-                  <CtrlButton name = " Полив" />
-                  <CtrlButton name = " Освещение" />
-                  <CtrlButton name = " Вентиляция" />
-                  <CtrlButton name = " Нагрев" />
+                  <CtrlButton port = '57' name = " Полив" />
+                  <CtrlButton port = '58' name = " Освещение" />
+                  <CtrlButton port = '59' name = " Вентиляция" />
+                  <CtrlButton port = '60' name = " Нагрев" />
                 </div>
                 <div>
                     <label>
@@ -164,13 +214,11 @@ export class TestPage extends Component {
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>
                   <button onClick={this.handlePrograms}>
-                    <table id='device'>
-                      <tbody>
-                        <tr> {this.renderTableHeader()} </tr> 
-                        {this.renderTableData()}
-                      </tbody>
-                    </table>
-                  </button>
+                    "Select programm ..."
+                  </button> 
+                </div>
+                <div>
+                  <DeviceTable devices={DEVICES} />
                 </div>
             </div>
         );

@@ -21,7 +21,7 @@
     "babel-loader": "^8.0.6",
     "del": "^2.0.2",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "latest",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-csso": "^2.0.0",
     "gulp-gzip": "^1.4.2",
     "gulp-htmlmin": "^3.0.0",
@@ -39,6 +39,7 @@
     "webpack-livereload-plugin": "^2.2.0"
   },
   "dependencies": {
+    "gulp-update": "0.0.2",
     "lodash": "^4.17.15",
     "mini-toastr": "^0.8.1",
     "preact": "^8.5.2"
