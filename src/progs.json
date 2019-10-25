@@ -1,19 +1,27 @@
-{
-   "id": "1",
-   "name": "Program 1",
-   "pump": [
-		"ON=08:20:00",
-       	"OFF=08:40:00",
-		"ON=12:00:00",
-       	"OFF=12:10:00",
-		"ON=16:30:00",
-       	"OFF=16:40:00",
-		"ON=20:20:00",
-       	"OFF=20:10:00"
-   ],
-   "light": [
-       	"ON=20:30:00",
-       	"OFF=07:30:00"
-   ]
-}
+[
+  {id: 1, name: "Programm 1", device: "pump", time: "08:20:00", onOff: 1},
+  {id: 1, name: "Programm 1", device: "pump", time: "08:40:00", onOff: 1},
+  {id: 1, name: "Programm 1", device: "pump", time: "14:00:00", onOff: 1},
+  {id: 1, name: "Programm 1", device: "pump", time: "14:10:00", onOff: 1},
+  {id: 1, name: "Programm 1", device: "light", time: "07:30:00", onOff: 0},
+  {id: 1, name: "Programm 1", device: "light", time: "19:30:00", onOff: 1},
+  {id: 2, name: "Programm 2", device: "pump", time: "07:20:00", onOff: 1},
+  {id: 2, name: "Programm 2", device: "pump", time: "07:40:00", onOff: 0},
+  {id: 2, name: "Programm 2", device: "pump", time: "12:00:00", onOff: 1},
+  {id: 2, name: "Programm 2", device: "pump", time: "12:10:00", onOff: 0},
+  {id: 2, name: "Programm 2", device: "light", time: "06:30:00", onOff: 0},
+  {id: 2, name: "Programm 2", device: "light", time: "20:30:00", onOff: 1},
+  {id: 3, name: "Programm 3", device: "pump", time: "09:20:00", onOff: 1},
+  {id: 3, name: "Programm 3", device: "pump", time: "09:40:00", onOff: 1},
+  {id: 3, name: "Programm 3", device: "pump", time: "15:00:00", onOff: 1},
+  {id: 3, name: "Programm 3", device: "pump", time: "15:10:00", onOff: 1},
+  {id: 3, name: "Programm 3", device: "light", time: "09:30:00", onOff: 0},
+  {id: 3, name: "Programm 3", device: "light", time: "18:30:00", onOff: 1},
+  {id: 4, name: "Programm 4", device: "pump", time: "06:20:00", onOff: 1},
+  {id: 4, name: "Programm 4", device: "pump", time: "06:40:00", onOff: 0},
+  {id: 4, name: "Programm 4", device: "pump", time: "11:00:00", onOff: 1},
+  {id: 4, name: "Programm 4", device: "pump", time: "11:10:00", onOff: 0},
+  {id: 4, name: "Programm 4", device: "light", time: "10:30:00", onOff: 0},
+  {id: 4, name: "Programm 4", device: "light", time: "16:30:00", onOff: 1},
+]
 

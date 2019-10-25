@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
-import { getJsonStat } from '../lib/espeasy';
+import { getJsonStat, getVariables } from '../lib/espeasy';
 
+var server_path = "http://192.168.43.224";
 const DEVICES = [
   {name: "pump", time: "08:20:00", onOff: 1},
   {name: "pump", time: "08:40:00", onOff: 0},
@@ -52,7 +53,7 @@ class CtrlButton extends Component {
         isOn: !state.isOn
     }));
     const onOff = this.state.isOn ? 0 : 1;
-    const url = 'http://192.168.0.103/control?cmd=pcfgpio,' + this.props.port + ',' + onOff;
+    const url = server_path + '/control?cmd=pcfgpio,' + this.props.port + ',' + onOff;
     console.log(url);
     fetch(url)
       .then(response => response.text())
@@ -139,12 +140,20 @@ class DeviceTable extends Component {
   }
 }
 
+const getVars = async () => {
+  const vars = await getJsonStat(server_path);
+  console.log(vars);
+  const host = window.location.host;
+  console.log(server_path);
+}
+
 export class TestPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
           value: 1,
-          variables: null,
+          dateTime: '',
+          temperature: '',
           programs: this.handlePrograms(),
           date: new Date()};
     
@@ -153,16 +162,28 @@ export class TestPage extends Component {
         this.handlePrograms = this.handlePrograms.bind(this);
       }
 
+      tick() {
+        fetch(server_path + '/json').then(response => {
+          return response.json()
+        }).then(result => {
+          this.setState({dateTime : 'Дата: ' + result.System["Local Time"]});
+          this.setState({temperature: 'Температура' + "=" + result.Sensors[0].TaskValues[0].Value});
+          });
+          getVars();         
+      }
+
       componentDidMount() {
  //       this.handlePrograms();
-//        this.timerID = setInterval(
-//          () => this.tick(),
-//          1000
-//        );
+        server_path = (window.location.host.indexOf("127") > -1) ? server_path : window.location.host;
+        console.log(server_path);
+        this.timerID = setInterval(
+          () => this.tick(),
+          2000
+        );
       }
 
       componentWillUnmount() {
- //       clearInterval(this.timerID);
+        clearInterval(this.timerID);
       }
 
       handlePrograms(){  
@@ -184,6 +205,7 @@ export class TestPage extends Component {
       }
     
       handleSubmit(event) {
+        this.handlePrograms();
         alert('Выбрана Программа №' + this.state.value);
         event.preventDefault();
       }
@@ -192,6 +214,8 @@ export class TestPage extends Component {
         return (
             <div>
                 <div>
+                  <p> {this.state.dateTime}</p>
+                  <p> {this.state.temperature}</p>
                   <CtrlButton port = '57' name = " Полив" />
                   <CtrlButton port = '58' name = " Освещение" />
                   <CtrlButton port = '59' name = " Вентиляция" />
@@ -213,12 +237,6 @@ export class TestPage extends Component {
                 </div>
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>
-                  <button onClick={this.handlePrograms}>
-                    "Select programm ..."
-                  </button> 
-                </div>
-                <div>
-                  <DeviceTable devices={DEVICES} />
                 </div>
             </div>
         );
