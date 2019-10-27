@@ -11,34 +11,6 @@ const DEVICES = [
   {name: "light", time: "19:30:00", onOff: 1},
 ]
 
-class Time extends Component {
-  constructor(props){
-      super(props);
-      this.timer = 0;
-      this.state = {
-          time: new Date()
-      };
-  }
-  componentWillMount(){
-      // set up timer
-      this.timer = setTimeout(() => {
-          this.setState({
-              time: new Date()
-          });
-          this.componentWillMount();
-      }, Math.floor(Date.now() / 1000) * 1000 + 1000 - Date.now());
-  }
-  componentWillUnmount(){
-      // remove timer
-      clearTimeout(this.timer);
-  }
-  
-  render() {
-      // render the current time
-      return this.state.time.toLocaleTimeString();
-  }
-}
-
 class CtrlButton extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +26,7 @@ class CtrlButton extends Component {
     }));
     const onOff = this.state.isOn ? 0 : 1;
     const url = server_path + '/control?cmd=pcfgpio,' + this.props.port + ',' + onOff;
-    console.log(url);
+//    console.log(url);
     fetch(url)
       .then(response => response.text())
       .then(cmd => this.setState({ cmd }));
@@ -142,9 +114,9 @@ class DeviceTable extends Component {
 
 const getVars = async () => {
   const vars = await getJsonStat(server_path);
-  console.log(vars);
+//  console.log(vars);
   const host = window.location.host;
-  console.log(server_path);
+//  console.log(server_path);
 }
 
 export class TestPage extends Component {
@@ -175,7 +147,7 @@ export class TestPage extends Component {
       componentDidMount() {
  //       this.handlePrograms();
         server_path = (window.location.host.indexOf("127") > -1) ? server_path : window.location.host;
-        console.log(server_path);
+//        console.log(server_path);
         this.timerID = setInterval(
           () => this.tick(),
           2000
@@ -186,16 +158,17 @@ export class TestPage extends Component {
         clearInterval(this.timerID);
       }
 
-      handlePrograms(){  
-        fetch('./progs.json').then(response => {
-          return response.json()
+      handlePrograms(id) {
+        const prog_id = Number(id);  
+        fetch('./progs.json')
+        .then(response => {
+          console.log(prog_id + " typrof:  " + typeof(prog_id))
+          return response.json();
         }).then(result => {
-          // Work with JSON data here
-          console.log(result);
-          this.setState({programs : result})
-          console.log(this.state.programs)
+          this.setState({programs : result.filter(object => object.id === prog_id)
+          });
+//          console.log(this.state.programs)
         }).catch(err => {
-          // Do something for an error here
           console.log("Error Reading data " + err);
         });
       }
@@ -205,16 +178,25 @@ export class TestPage extends Component {
       }
     
       handleSubmit(event) {
-        this.handlePrograms();
-        alert('Выбрана Программа №' + this.state.value);
+        this.handlePrograms(this.state.value);
+//        alert('Выбрана Программа №' + this.state.value);
         event.preventDefault();
+      }
+
+      timeSync(event) {
+        const url = server_path + '/control?cmd=setclock,1';
+        console.log(url);
+        fetch(url).then(response => { 
+          return response.text()
+        });
       }
 
       render() {
         return (
             <div>
                 <div>
-                  <p> {this.state.dateTime}</p>
+                  <p>{this.state.dateTime}</p>
+                  <button onClick={this.timeSync}>Синхронизация времени</button>
                   <p> {this.state.temperature}</p>
                   <CtrlButton port = '57' name = " Полив" />
                   <CtrlButton port = '58' name = " Освещение" />
