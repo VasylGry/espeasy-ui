@@ -43,7 +43,7 @@ class CtrlButton extends Component {
   }
 }
 
-class DeviceRow extends Component {
+class ProgramRow extends Component {
   render() {
     const name = this.props.name;
     return (
@@ -56,22 +56,17 @@ class DeviceRow extends Component {
   }
 }
 
-class TimeRow extends Component {
+class DeviceRow extends Component {
   render() {
     const device = this.props.device;
     const time = device.time;
-    const onOff = device.onOff ?
-      <span style={{color: 'green'}}>
-        <b>{"ON"}</b>
-      </span>
-      :
-      <span>
-        <b>{"OFF"}</b>
-      </span>;
+    const onOff = device.onOff ? undefined : device.onOff;
+    const temperature = device.temperature ? undefined : device.temperature;
     return (
       <tr>
         <td>{time}</td>
         <td>{onOff}</td>
+        <td>{temperature}</td>
       </tr>
     );
   }
@@ -85,13 +80,13 @@ class DeviceTable extends Component {
     this.props.devices.forEach((device) => {
       if (device.name !== lastName) {
         rows.push(
-          <DeviceRow
+          <ProgrammRow
             name={device.name}
             key={device.name} />
         );
       }
       rows.push(
-        <TimeRow
+        <DeviceRow
           device={device}
           key={device.name} />
       );
@@ -104,6 +99,7 @@ class DeviceTable extends Component {
           <tr>
             <th>Time</th>
             <th>State</th>
+            <th>Temperature [min, max]</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -216,6 +212,9 @@ export class TestPage extends Component {
                     <form onSubmit={this.handleSubmit}>
                       <input type="submit" value="Выбрать" />
                     </form>
+                    <div>
+                      <DeviceTable devices = DEVICES />
+                    </div>
                 </div>
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>
