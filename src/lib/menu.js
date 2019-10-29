@@ -19,7 +19,9 @@ import {
     RulesEditorPage, 
     SetupPage,
     SysVarsPage,
-	TestPage
+    UserPage,
+    UserControl,
+    ProgramPage
 } from '../pages';
 
 import { saveConfig } from '../conf/config.dat';
@@ -71,7 +73,11 @@ const menus = [
         { title: 'Файловая система', href: 'tools/fs', component: FSPage },
 //        { title: 'Старое ЧМИ', href: 'tools/oldui', action: oldUI },
     ] },
-	{ title: 'Test Page', href: 'test', component: TestPage, children: [] },
+	{ title: 'Пользователь', href: 'user', component: UserPage, children: [
+        { title: 'Управление', href: 'user/control', component: UserControl },
+        { title: 'Программа', href: 'user/program', component: ProgramPage },
+        { title: 'Загрузить', href: 'user/load', component: LoadPage }
+    ] },
 ];
 
 const routes = [
