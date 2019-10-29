@@ -171,11 +171,11 @@ export class TestPage extends Component {
 
       handleChange(event) {
         this.setState({value: event.target.value});
+        this.handlePrograms(this.state.value);
       }
     
-      handleSubmit(event) {
-        this.handlePrograms(this.state.value);
-//        alert('Выбрана Программа №' + this.state.value);
+      handleSubmit(event) { 
+        alert('Выбрана Программа №' + this.state.value);
         event.preventDefault();
       }
 
@@ -212,9 +212,6 @@ export class TestPage extends Component {
                     <form onSubmit={this.handleSubmit}>
                       <input type="submit" value="Выбрать" />
                     </form>
-                    <div>
-                      <DeviceTable devices = DEVICES />
-                    </div>
                 </div>
                 <div>
                   <p>{JSON.stringify(this.state.programs)}</p>

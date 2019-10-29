@@ -2,224 +2,224 @@
    {
       "id":1,
       "name":"Соя",
-      "device":"pump",
+      "device":"Полив",
       "time":"08:20:00",
       "onOff":1
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"pump",
+      "device":"Полив",
       "time":"08:40:00",
       "onOff":1
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"pump",
+      "device":"Полив",
       "time":"14:00:00",
       "onOff":1
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"pump",
+      "device":"Полив",
       "time":"14:10:00",
       "onOff":1
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"light",
+      "device":"Освещение",
       "time":"07:30:00",
       "onOff":0
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"light",
+      "device":"Освещение",
       "time":"19:30:00",
       "onOff":1
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"fan",
+      "device":"Вентиляция",
       "min":23,
       "max":27
    },
    {
       "id":1,
       "name":"Соя",
-      "device":"heater",
+      "device":"Нагрев",
       "min":15,
       "max":19
    },	
    {
       "id":2,
       "name":"Клевер",
-      "device":"pump",
+      "device":"Полив",
       "time":"07:20:00",
       "onOff":1
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"pump",
+      "device":"Полив",
       "time":"07:40:00",
       "onOff":0
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"pump",
+      "device":"Полив",
       "time":"12:00:00",
       "onOff":1
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"pump",
+      "device":"Полив",
       "time":"12:10:00",
       "onOff":0
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"light",
+      "device":"Освещение",
       "time":"06:30:00",
       "onOff":0
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"light",
+      "device":"Освещение",
       "time":"20:30:00",
       "onOff":1
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"fan",
+      "device":"Вентиляция",
       "min":23,
       "max":27
    },
    {
       "id":2,
       "name":"Клевер",
-      "device":"heater",
+      "device":"Нагрев",
       "min":15,
       "max":19
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"pump",
+      "device":"Полив",
       "time":"09:20:00",
       "onOff":1
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"pump",
+      "device":"Полив",
       "time":"09:40:00",
       "onOff":1
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"pump",
+      "device":"Полив",
       "time":"15:00:00",
       "onOff":1
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"pump",
+      "device":"Полив",
       "time":"15:10:00",
       "onOff":1
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"light",
+      "device":"Освещение",
       "time":"09:30:00",
       "onOff":0
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"light",
+      "device":"Освещение",
       "time":"18:30:00",
       "onOff":1
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"pump",
+      "device":"Полив",
       "time":"06:20:00",
       "onOff":1
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"fan",
+      "device":"Вентиляция",
       "min":23,
       "max":27
    },
    {
       "id":3,
       "name":"Батавия",
-      "device":"heater",
+      "device":"Нагрев",
       "min":15,
       "max":19
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"pump",
+      "device":"Полив",
       "time":"06:40:00",
       "onOff":0
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"pump",
+      "device":"Полив",
       "time":"11:00:00",
       "onOff":1
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"pump",
+      "device":"Полив",
       "time":"11:10:00",
       "onOff":0
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"light",
+      "device":"Освещение",
       "time":"10:30:00",
       "onOff":0
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"light",
+      "device":"Освещение",
       "time":"16:30:00",
       "onOff":1
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"fan",
+      "device":"Вентиляция",
       "min":23,
       "max":27
    },
    {
       "id":4,
       "name":"Шпинат",
-      "device":"heater",
+      "device":"Нагрев",
       "min":15,
       "max":19
    }
