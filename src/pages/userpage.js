@@ -86,7 +86,7 @@ export class UserPage extends Component {
       }
 
       componentDidMount() {
-        server_path = (window.location.host.indexOf("127") > -1) ? server_path : window.location.host;
+        server_path = (window.location.host.indexOf("127") > -1) ? server_path : "http://" + window.location.host;
         this.handlePrograms(this.state.value);
         this.timerID = setInterval(
           () => this.tick(),
@@ -124,6 +124,8 @@ export class UserPage extends Component {
       render() {
         return (
             <div>
+              <p>{this.state.dateTime}</p>
+              <p> {this.state.temperature}</p>
               <h3> Программа №{this.state.value}</h3>
               <p>{JSON.stringify(this.state.programs)}</p>
             </div>

@@ -18,7 +18,7 @@ class CtrlButton extends Component {
     }));
     const onOff = this.state.isOn ? 0 : 1;
     const url = server_path + '/control?cmd=pcfgpio,' + this.props.port + ',' + onOff;
-//    console.log(url);
+    console.log(url);
     fetch(url)
       .then(response => response.text())
       .then(cmd => this.setState({ cmd }));
@@ -63,8 +63,8 @@ export class UserControl extends Component {
       }
 
       componentDidMount() {
-        server_path = (window.location.host.indexOf("127") > -1) ? server_path : window.location.host;
-//        console.log(server_path);
+        server_path = (window.location.host.indexOf("127") > -1) ? server_path : "http://" + window.location.host;
+        console.log(server_path);
         this.timerID = setInterval(
           () => this.tick(),
           2000
@@ -114,7 +114,7 @@ export class ProgramPage extends Component {
       }
 
       componentDidMount() {
-        server_path = (window.location.host.indexOf("127") > -1) ? server_path : window.location.host;
+        server_path = (window.location.host.indexOf("127") > -1) ? server_path : "http://" + window.location.host;
         this.handlePrograms(this.state.value);
       }
 
