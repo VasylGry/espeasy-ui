@@ -158,6 +158,12 @@ export class ProgramPage extends Component {
                             <option value="2">Программа №2</option>
                             <option value="3">Программа №3</option>
                             <option value="4">Программа №4</option>
+                            <option value="5">Программа №5</option>
+                            <option value="6">Программа №6</option>
+                            <option value="7">Программа №7</option>
+                            <option value="8">Программа №8</option>
+                            <option value="9">Программа №9</option>
+                            <option value="10">Программа №10</option>
                         </select>
                     </label>
                     <form onSubmit={this.handleSubmit}>

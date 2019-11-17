@@ -41,6 +41,7 @@ node_modules
 
 # Debug files
 *.dSYM/
+build/*
 *.su
 *.idb
 *.pdb
