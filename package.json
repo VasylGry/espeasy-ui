@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "gulp-update": "0.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mini-toastr": "^0.8.1",
     "preact": "^8.5.2"
   },
